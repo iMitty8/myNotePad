@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NotesListVC.swift
 //  myNotePad
 //
 //  Created by Mithun R on 14/04/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NotesListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

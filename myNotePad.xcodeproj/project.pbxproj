@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9955DC8D2081E5DC00C7419A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DC8C2081E5DC00C7419A /* AppDelegate.swift */; };
-		9955DC8F2081E5DC00C7419A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DC8E2081E5DC00C7419A /* ViewController.swift */; };
+		9955DC8F2081E5DC00C7419A /* NotesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DC8E2081E5DC00C7419A /* NotesListVC.swift */; };
 		9955DC922081E5DC00C7419A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9955DC902081E5DC00C7419A /* Main.storyboard */; };
 		9955DC952081E5DC00C7419A /* myNotePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9955DC932081E5DC00C7419A /* myNotePad.xcdatamodeld */; };
 		9955DC972081E5DC00C7419A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9955DC962081E5DC00C7419A /* Assets.xcassets */; };
@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		9955DC892081E5DC00C7419A /* myNotePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myNotePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9955DC8C2081E5DC00C7419A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9955DC8E2081E5DC00C7419A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9955DC8E2081E5DC00C7419A /* NotesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListVC.swift; sourceTree = "<group>"; };
 		9955DC912081E5DC00C7419A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9955DC942081E5DC00C7419A /* myNotePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myNotePad.xcdatamodel; sourceTree = "<group>"; };
 		9955DC962081E5DC00C7419A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,8 +83,9 @@
 		9955DC8B2081E5DC00C7419A /* myNotePad */ = {
 			isa = PBXGroup;
 			children = (
+				9955DCB32081FE3800C7419A /* Model */,
 				9955DC8C2081E5DC00C7419A /* AppDelegate.swift */,
-				9955DC8E2081E5DC00C7419A /* ViewController.swift */,
+				9955DC8E2081E5DC00C7419A /* NotesListVC.swift */,
 				9955DC902081E5DC00C7419A /* Main.storyboard */,
 				9955DC962081E5DC00C7419A /* Assets.xcassets */,
 				9955DC982081E5DC00C7419A /* LaunchScreen.storyboard */,
@@ -109,6 +110,13 @@
 				9955DCB02081FC8E00C7419A /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9955DCB32081FE3800C7419A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9955DC8F2081E5DC00C7419A /* ViewController.swift in Sources */,
+				9955DC8F2081E5DC00C7419A /* NotesListVC.swift in Sources */,
 				9955DC8D2081E5DC00C7419A /* AppDelegate.swift in Sources */,
 				9955DC952081E5DC00C7419A /* myNotePad.xcdatamodeld in Sources */,
 			);
