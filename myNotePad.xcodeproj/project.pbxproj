@@ -14,6 +14,7 @@
 		9955DC972081E5DC00C7419A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9955DC962081E5DC00C7419A /* Assets.xcassets */; };
 		9955DC9A2081E5DC00C7419A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9955DC982081E5DC00C7419A /* LaunchScreen.storyboard */; };
 		9955DCA52081E5DC00C7419A /* myNotePadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DCA42081E5DC00C7419A /* myNotePadTests.swift */; };
+		9955DCB12081FC8E00C7419A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9955DCB02081FC8E00C7419A /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		9955DCA02081E5DC00C7419A /* myNotePadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myNotePadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9955DCA42081E5DC00C7419A /* myNotePadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myNotePadTests.swift; sourceTree = "<group>"; };
 		9955DCA62081E5DC00C7419A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9955DCB02081FC8E00C7419A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9955DCB12081FC8E00C7419A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +67,7 @@
 				9955DC8B2081E5DC00C7419A /* myNotePad */,
 				9955DCA32081E5DC00C7419A /* myNotePadTests */,
 				9955DC8A2081E5DC00C7419A /* Products */,
+				9955DCAF2081FC8E00C7419A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +103,14 @@
 			path = myNotePadTests;
 			sourceTree = "<group>";
 		};
+		9955DCAF2081FC8E00C7419A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9955DCB02081FC8E00C7419A /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +121,7 @@
 				9955DC852081E5DC00C7419A /* Sources */,
 				9955DC862081E5DC00C7419A /* Frameworks */,
 				9955DC872081E5DC00C7419A /* Resources */,
+				9955DCB22081FCEE00C7419A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -196,6 +209,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9955DCB22081FCEE00C7419A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9955DC852081E5DC00C7419A /* Sources */ = {
@@ -358,6 +388,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = myNotePad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mit.myNotePad;
@@ -372,6 +406,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = myNotePad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mit.myNotePad;
