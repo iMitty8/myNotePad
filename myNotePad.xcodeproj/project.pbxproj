@@ -20,6 +20,9 @@
 		9955DCBB20829AA500C7419A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DCBA20829AA500C7419A /* Constants.swift */; };
 		9955DCBD20832EB100C7419A /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DCBC20832EB100C7419A /* Notes.swift */; };
 		9955DCBF208339C900C7419A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955DCBE208339C900C7419A /* DataManager.swift */; };
+		9955F4382083EB8A00AEF80C /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955F4372083EB8900AEF80C /* ServiceManager.swift */; };
+		9955F43A208404F600AEF80C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9955F439208404F600AEF80C /* SwiftyJSON.framework */; };
+		9955F43C208488AB00AEF80C /* HelperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955F43B208488AA00AEF80C /* HelperClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		9955DCBA20829AA500C7419A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9955DCBC20832EB100C7419A /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		9955DCBE208339C900C7419A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		9955F4372083EB8900AEF80C /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		9955F439208404F600AEF80C /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		9955F43B208488AA00AEF80C /* HelperClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9955DCB12081FC8E00C7419A /* Alamofire.framework in Frameworks */,
+				9955F43A208404F600AEF80C /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +123,7 @@
 		9955DCAF2081FC8E00C7419A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9955F439208404F600AEF80C /* SwiftyJSON.framework */,
 				9955DCB02081FC8E00C7419A /* Alamofire.framework */,
 			);
 			name = Frameworks;
@@ -127,6 +135,7 @@
 				9955DC932081E5DC00C7419A /* myNotePad.xcdatamodeld */,
 				9955DCBC20832EB100C7419A /* Notes.swift */,
 				9955DCBE208339C900C7419A /* DataManager.swift */,
+				9955F4372083EB8900AEF80C /* ServiceManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				9955DCBA20829AA500C7419A /* Constants.swift */,
+				9955F43B208488AA00AEF80C /* HelperClass.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -257,6 +267,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputPaths = (
 			);
@@ -276,6 +287,8 @@
 				9955DCBD20832EB100C7419A /* Notes.swift in Sources */,
 				9955DC8F2081E5DC00C7419A /* NotesListVC.swift in Sources */,
 				9955DC8D2081E5DC00C7419A /* AppDelegate.swift in Sources */,
+				9955F4382083EB8A00AEF80C /* ServiceManager.swift in Sources */,
+				9955F43C208488AB00AEF80C /* HelperClass.swift in Sources */,
 				9955DC952081E5DC00C7419A /* myNotePad.xcdatamodeld in Sources */,
 				9955DCB820823DA900C7419A /* NotesDetailsVC.swift in Sources */,
 				9955DCBB20829AA500C7419A /* Constants.swift in Sources */,

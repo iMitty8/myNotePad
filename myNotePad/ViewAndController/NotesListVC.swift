@@ -11,6 +11,7 @@ import UIKit
 class NotesListVC: UIViewController {
 
     @IBOutlet weak var notesTblVw: UITableView!
+    @IBOutlet weak var syncButton: UIButton!
 
     var selectedIndex:IndexPath?
     var initialDetailVC:UIViewController?
@@ -21,6 +22,8 @@ class NotesListVC: UIViewController {
         loadInitialUISetup()
 
         getData()
+        postUnsyncedNotes(isForcePullReuired: true)
+        
 
         if self.splitViewController != nil {
             initialDetailVC = self.splitViewController?.viewControllers[1]
@@ -35,10 +38,16 @@ class NotesListVC: UIViewController {
         if let index = selectedIndex {
             notesTblVw.deselectRow(at: index, animated: true)
         }
-
+        getData()
+        postUnsyncedNotes()
 
     }
 
+    @IBAction func forceSyncAction(_ sender: Any) {
+
+        postUnsyncedNotes(isForcePullReuired: true)
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,6 +79,16 @@ class NotesListVC: UIViewController {
         notesTblVw.tableFooterView = UIView()
     }
 
+    func rotateSyncButton() {
+        syncButton.rotate360Degrees()
+        syncButton.isUserInteractionEnabled = false
+    }
+
+    func stopRotatingSyncButton() {
+        self.syncButton.layer.removeAllAnimations()
+        syncButton.isUserInteractionEnabled = true
+    }
+
     func getData() {
 
         DataManager.sharedInstance.getAllNotes { sucess in
@@ -81,16 +100,80 @@ class NotesListVC: UIViewController {
     }
 
     func loadInitialDetailView() {
-        if let splitVC = self.splitViewController {
-            var splitViewArray = splitVC.viewControllers
 
-            splitViewArray[1] = initialDetailVC!
-            self.splitViewController?.viewControllers = splitViewArray
+        if self.navigationController == nil {
+
+            if let splitVC = self.splitViewController{
+                var splitViewArray = splitVC.viewControllers
+
+                splitViewArray[1] = initialDetailVC!
+                self.splitViewController?.viewControllers = splitViewArray
+            }
+
+        }
+    }
+
+    func postUnsyncedNotes (isForcePullReuired:Bool = false) {
+
+        rotateSyncButton()
+
+        DataManager.sharedInstance.getUnSyncedNotes() {
+            success, result  in
+            if success {
+
+                if result.count > 0 {
+                    ServiceManager.sharedInstance.postUnsyncedListToServer(notes: result, completion: { (success, error) in
+
+                        self.stopRotatingSyncButton()
+
+                        if success {
+
+                            self.syncButton.setImage(#imageLiteral(resourceName: "reload"), for: UIControlState.normal)
+                            if isForcePullReuired {
+                                self.pullAllDataFormServer()
+                            }
+                        }
+                        else {
+                            self.syncButton.setImage(#imageLiteral(resourceName: "refresh_pending"), for: UIControlState.normal)
+                        }
+                    })
+                }
+                else {
+                    self.syncButton.setImage(#imageLiteral(resourceName: "reload"), for: UIControlState.normal)
+                }
+
+            }
+        }
+    }
+
+    func pullAllDataFormServer() {
+
+        rotateSyncButton()
+
+        ServiceManager.sharedInstance.getAllNotes { (success, notesResult, error) in
+
+            self.stopRotatingSyncButton()
+
+            if success {
+                self.syncButton.setImage(#imageLiteral(resourceName: "reload"), for: UIControlState.normal)
+                DataManager.sharedInstance.createNotesFromArray(notesArray: notesResult!, completion: { (success) in
+
+                    if success {
+                        self.getData()
+                    }
+
+                })
+
+            }
+            else {
+                self.syncButton.setImage(#imageLiteral(resourceName: "refresh_pending"), for: UIControlState.normal)
+            }
         }
     }
 
     //MARK: Actions:
     @IBAction func newNotesAction(_ sender: Any) {
+
 
         if let index = selectedIndex {
             notesTblVw.deselectRow(at: index, animated: true)
@@ -125,6 +208,7 @@ extension NotesListVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             DataManager.sharedInstance.deleteNotesAtIndex(indexPath.row, completion: { (sucess) in
                 if (sucess) {
+                    //TODO: Integrate with API
                     getData()
                     loadInitialDetailView()
                 }
@@ -161,6 +245,7 @@ extension NotesListVC: UISplitViewControllerDelegate {
 extension NotesListVC: NotesListProtocol {
     func reloadNotesList() {
         getData()
+        postUnsyncedNotes()
     }
 }
 

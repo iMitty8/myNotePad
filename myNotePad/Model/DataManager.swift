@@ -52,6 +52,42 @@ class DataManager {
 
     }
 
+    func createNotesFromArray(notesArray:[Notes], completion:(Bool)->()) {
+
+
+        deleteAllNotes { (success) in
+            if success {
+
+                for curretNotes in notesArray {
+
+                    let entity =
+                        NSEntityDescription.entity(forEntityName: "Notes",
+                                                   in: managedContext)!
+                    let notes = Notes(entity: entity,
+                                      insertInto: managedContext)
+                    notes.nt_ID = curretNotes.nt_ID
+                    notes.nt_title = curretNotes.nt_title
+                    notes.nt_content = curretNotes.nt_content
+                    notes.nt_syncedStatus = true
+
+                }
+
+                do {
+                    try managedContext.save()
+                    completion(true)
+
+                } catch let error as NSError {
+
+                    print("Could not save. \(error), \(error.userInfo)")
+                    completion(false)
+                }
+
+
+            }
+        }
+
+    }
+
     func getAllNotes(completion: (Bool) -> ()) {
 
         let fetchRequest:NSFetchRequest<Notes> = Notes.fetchRequest()
@@ -63,6 +99,42 @@ class DataManager {
             completion(false)
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+
+    }
+
+    func getUnSyncedNotes(completion:(Bool, [Notes]) ->()) {
+
+        let fetchRequest:NSFetchRequest<Notes> = Notes.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "nt_syncedStatus == %@", false as NSNumber)
+
+
+        do
+        {
+            let retrivedData = try managedContext.fetch(fetchRequest)
+            if retrivedData.count > 0
+            {
+                let receivedArray = retrivedData
+
+                do{
+                    try managedContext.save()
+                    completion(true, receivedArray)
+                }
+                catch
+                {
+                    completion(false, [])
+                    print(error)
+                }
+            }
+            else {
+                completion(true, [])
+            }
+        }
+        catch
+        {
+            completion(false, [])
+            print(error)
+        }
+
 
     }
 
@@ -93,6 +165,16 @@ class DataManager {
                     print(error)
                 }
             }
+            else if retrivedData.count < 1 {
+                self.createNewNotes(id: id, title: title, content: content, completion: { (success) in
+                    if success {
+                        completion(true)
+                    }
+                    else {
+                        print ("Create Notes failed")
+                    }
+                })
+            }
         }
         catch
         {
@@ -113,6 +195,21 @@ class DataManager {
         } catch let error as NSError {
             completion(false)
             print("Could not save. \(error), \(error.userInfo)")
+        }
+
+    }
+
+    func deleteAllNotes(completion: (Bool) -> ()) {
+
+        let fetchRequest:NSFetchRequest<Notes> = Notes.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+
+        do {
+            try managedContext.execute(deleteRequest)
+            completion(true)
+        } catch let error as NSError {
+            print("Could not Delete. \(error), \(error.userInfo)")
+            completion(false)
         }
 
     }
